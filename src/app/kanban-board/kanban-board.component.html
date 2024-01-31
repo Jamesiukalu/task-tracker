@@ -1,10 +1,27 @@
-<div class="kanban-board" cdkDropListGroup>
-  <div *ngFor="let column of columns" class="kanban-column" cdkDropList
-       (cdkDropListDropped)="onDrop($event, column)">
-    <h2>{{ column }}</h2>
-    <div *ngFor="let task of tasks[column]" class="task" cdkDrag
-         (cdkDragStarted)="onDragStart(task)">
-      {{ task.title }}
+<div class="kanban-board grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" cdkDropListGroup>
+  <div *ngFor="let column of columns" class="kanban-column bg-gray-200 p-4 rounded" cdkDropList (cdkDropListDropped)="onDrop($event, column)">
+    <h2 class="text-lg font-semibold mb-4">{{ column }}</h2>
+    <div *ngFor="let task of taskService.getTasks(column.toLowerCase())" class="task mb-2" cdkDrag (cdkDragStarted)="onDragStart(task)">
+      <app-task [task]="task" (editTaskClick)="onEditTask($event)" (deleteTaskClick)="deleteTask($event)"></app-task>
+    </div>
+    <div class="add-task-button" *ngIf="column === 'Open'">
+      <button class="bg-blue-500 text-white px-2 py-1 rounded" (click)="toggleAddTaskForm()">Add New Task</button>
     </div>
   </div>
+</div>
+
+<div *ngIf="showAddTaskForm" class="mt-4">
+  <form (ngSubmit)="addNewTask()" class="flex flex-col space-y-4">
+    <label for="title" class="text-sm font-semibold">Title:</label>
+    <input type="text" id="title" name="title" [(ngModel)]="newTask.title" required class="border rounded p-2">
+
+    <label for="description" class="text-sm font-semibold">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="newTask.description" required class="border rounded p-2"></textarea>
+
+    <label for="dueDate" class="text-sm font-semibold">Due Date:</label>
+    <input type="date" id="dueDate" name="dueDate" [(ngModel)]="newTask.dueDate" required class="border rounded p-2">
+
+    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Add Task</button>
+  </form>
+  <button class="bg-gray-500 text-white px-4 py-2 mt-2 rounded" (click)="toggleAddTaskForm()">Cancel</button>
 </div>

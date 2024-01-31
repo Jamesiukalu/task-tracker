@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+// task.component.ts
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -7,9 +8,23 @@ import { Component, Input } from '@angular/core';
 })
 export class TaskComponent {
   @Input() task: any;
+  @Output() editTaskClick = new EventEmitter<any>();
+  @Output() deleteTaskClick = new EventEmitter<number>();
+
+
+  isAddTaskFormVisible = false;
+  newTask: any = { title: '', description: '', dueDate: '' };
+
 
   editTask() {
-    // Implement the logic to edit the task (open a modal, navigate to edit page, etc.)
-    console.log('Editing task:', this.task);
+    // Emit an event to inform the parent component (KanbanBoardComponent) about the edit action
+    this.editTaskClick.emit(this.task);
   }
+  deleteTask(taskId: number) {
+    this.deleteTaskClick.emit(this.task.id);
+  }
+  toggleAddTaskForm() {
+    this.isAddTaskFormVisible = !this.isAddTaskFormVisible;
+  }
+
 }

@@ -1,27 +1,63 @@
-# TaskTracker
+# Angular Task Tracker Application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.11.
+This project is a task tracker application developed using the Angular framework. The application allows users to manage tasks with features such as adding, editing, and deleting tasks.
 
-## Development server
+## Features
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Display a Kanban board with 4 columns: Open, Pending, In Progress, and Completed.
+- Add a new task to the "Open" column with a title, description, and due date.
+- Edit existing tasks seamlessly.
+- Drag and drop tasks persistently across columns.
+- Responsive design implemented using Tailwind CSS for an optimal user experience.
 
-## Code scaffolding
+## Prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Before you begin, ensure you have the following:
 
-## Build
+- Node.js: Install Node.js from [nodejs.org](https://nodejs.org/).
+- Angular CLI: Install Angular CLI globally by running `npm install -g @angular/cli`.
+- Tailwind CSS: Integrated for styling.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Getting Started
 
-## Running unit tests
+1. Clone the repository:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+   ```bash
+   git clone https://github.com/your-username/your-angular-task-tracker.git
+   ```
 
-## Running end-to-end tests
+2. Navigate to the project directory:
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+   ```bash
+   cd your-angular-task-tracker
+   ```
 
-## Further help
+3. Install dependencies:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+   ```bash
+   npm install
+   ```
+
+## Running the Application
+
+Run the following command to start the development server:
+
+```bash
+ng serve
+```
+
+Visit `http://localhost:4200/` in your web browser to access the application.
+
+## Usage
+
+- Drag and drop tasks between columns.
+- Click the "Add New Task" button in the "Open" column to add a new task.
+- Edit and delete tasks using the provided buttons.
+
+## Contributing
+
+If you'd like to contribute to this project, feel free to fork the repository and submit a pull request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
