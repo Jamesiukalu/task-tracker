@@ -1,7 +1,10 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { CdkDragDrop, CdkDragStart } from '@angular/cdk/drag-drop';
 import { TaskService } from '../task.service';
-import { TaskDialogService } from '../task-dialog.service';
+import { TaskDialogService } from '../task-dialog.service';import { MatDialog } from '@angular/material/dialog';
+import { TaskAddModalComponent } from '../task-add-modal/task-add-modal.component';
+import { NewTaskDialogService } from '../new-task-dialog.service';
+
 
 @Component({
   selector: 'app-kanban-board',
@@ -17,6 +20,8 @@ export class KanbanBoardComponent {
 
   constructor(public taskService: TaskService,
     private taskDialogService: TaskDialogService,
+    private newTaskDialogService: NewTaskDialogService,
+    private dialog: MatDialog,
     private cdr: ChangeDetectorRef) {}
 
   get tasks(): any {
@@ -57,13 +62,21 @@ export class KanbanBoardComponent {
 
   onEditTask(task: any) {
     if (task.title === '' && task.description === '' && task.dueDate === '') {
-      // Handle new task addition
       this.taskService.addTask('open', task);
     } else {
       this.taskDialogService.openEditDialog(task);
     }
   }
-// kanban-board.component.ts
+  toggleAddTaskForm() {
+    this.newTaskDialogService.openNewDialog((result: { title: string, description: string, dueDate: string }) => {
+      if (result) {
+        this.taskService.addTask('open', result);
+      }
+    })
+    }
+
+
+
 deleteTask(taskId: number) {
   // Determine the column in which the task is located
   const column = this.taskService.getColumnForTask(taskId);
@@ -72,18 +85,7 @@ deleteTask(taskId: number) {
   this.taskService.deleteTask(column, taskId);
 }
 
-
-  toggleAddTaskForm() {
-    this.showAddTaskForm = !this.showAddTaskForm;
-  }
   // Handle the addition of a new task to the "Open" column
-addNewTask() {
-  if (this.newTask.title && this.newTask.description && this.newTask.dueDate) {
-    this.taskService.addTask('open', this.newTask);
-    // Clear the new task fields after adding
-    this.newTask = { title: '', description: '', dueDate: '' };
-  }
-}
 
 
 

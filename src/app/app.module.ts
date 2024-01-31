@@ -13,6 +13,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
 import { MatCardModule } from '@angular/material/card'
 import { TaskService } from './task.service';
 import { TaskEditModalComponent } from './task-edit-modal/task-edit-modal.component';
+import { TaskAddModalComponent } from './task-add-modal/task-add-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,9 +21,10 @@ import { TaskEditModalComponent } from './task-edit-modal/task-edit-modal.compon
     KanbanBoardComponent,
     TaskComponent,
     KanbanBoardComponent,
-    TaskEditModalComponent
+    TaskEditModalComponent,
+    TaskAddModalComponent
   ],
-  entryComponents: [TaskEditModalComponent],
+  entryComponents: [TaskEditModalComponent, TaskAddModalComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

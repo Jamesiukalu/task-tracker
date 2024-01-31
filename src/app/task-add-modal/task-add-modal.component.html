@@ -1,0 +1,25 @@
+<div class="p-4 bg-gray-800 text-white">
+  <h2 class="text-xl font-semibold">Add New Task</h2>
+</div>
+
+<form (ngSubmit)="onSave()" class="p-4 space-y-4">
+  <div class="flex flex-col">
+    <label for="title" class="text-sm font-semibold">Title:</label>
+    <input type="text" id="title" name="title" [(ngModel)]="newTask.title" required class="border rounded p-2">
+  </div>
+
+  <div class="flex flex-col">
+    <label for="description" class="text-sm font-semibold">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="newTask.description" required class="border rounded p-2"></textarea>
+  </div>
+
+  <div class="flex flex-col">
+    <label for="dueDate" class="text-sm font-semibold">Due Date:</label>
+    <input type="date" id="dueDate" name="dueDate" [(ngModel)]="newTask.dueDate" required class="border rounded p-2">
+  </div>
+
+  <div class="flex space-x-2">
+    <button type="button" (click)="onSave()" class="bg-green-500 text-white px-4 py-2 rounded">Save</button>
+    <button type="button" (click)="onCancel()" class="bg-gray-500 text-white px-4 py-2 mt-2 rounded">Cancel</button>
+  </div>
+</form>
