@@ -4,6 +4,7 @@ import { TaskService } from '../task.service';
 import { TaskDialogService } from '../task-dialog.service';import { MatDialog } from '@angular/material/dialog';
 import { TaskAddModalComponent } from '../task-add-modal/task-add-modal.component';
 import { NewTaskDialogService } from '../new-task-dialog.service';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -22,7 +23,10 @@ export class KanbanBoardComponent {
     private taskDialogService: TaskDialogService,
     private newTaskDialogService: NewTaskDialogService,
     private dialog: MatDialog,
-    private cdr: ChangeDetectorRef) {}
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService) {}
+
+
 
   get tasks(): any {
     const tasks = this.columns.reduce((acc, column) => {
@@ -34,6 +38,9 @@ export class KanbanBoardComponent {
     return tasks;
   }
 
+  get isAuthenticated(): boolean {
+    return !!this.authService.user$
+  }
 
   onDragStart(task: any) {
     this.taskService.setDraggedTask(task);

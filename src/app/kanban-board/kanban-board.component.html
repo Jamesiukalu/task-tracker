@@ -1,4 +1,4 @@
-<div class="bg-gray-800 text-white p-4">
+<div class="bg-gray-800 text-white p-4" *ngIf="isAuthenticated">
   <h1 class="text-2xl font-semibold">Task Tracker</h1>
 </div>
 
@@ -14,3 +14,6 @@
   </div>
 </div>
 
+<div *ngIf="!isAuthenticated">
+  <app-sign-in></app-sign-in>
+</div>

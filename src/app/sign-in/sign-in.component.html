@@ -1,0 +1,12 @@
+<!-- signin.component.html -->
+<div class="mb-4">
+  <label for="email" class="block text-sm font-medium text-gray-600">Email:</label>
+  <input id="email" type="email" [(ngModel)]="email" class="mt-1 p-2 border rounded-md w-full" />
+</div>
+<div class="mb-4">
+  <label for="password" class="block text-sm font-medium text-gray-600">Password:</label>
+  <input id="password" type="password" [(ngModel)]="password" class="mt-1 p-2 border rounded-md w-full" />
+</div>
+<div>
+  <button (click)="signIn()" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Sign In</button>
+</div>

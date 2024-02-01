@@ -14,6 +14,13 @@ import { MatCardModule } from '@angular/material/card'
 import { TaskService } from './task.service';
 import { TaskEditModalComponent } from './task-edit-modal/task-edit-modal.component';
 import { TaskAddModalComponent } from './task-add-modal/task-add-modal.component';
+import { SignInComponent } from './sign-in/sign-in.component';
+import { environment } from 'src/environments/environment';
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AuthService } from './auth.service';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -22,7 +29,9 @@ import { TaskAddModalComponent } from './task-add-modal/task-add-modal.component
     TaskComponent,
     KanbanBoardComponent,
     TaskEditModalComponent,
-    TaskAddModalComponent
+    TaskAddModalComponent,
+    SignInComponent,
+
   ],
   entryComponents: [TaskEditModalComponent, TaskAddModalComponent],
   imports: [
@@ -33,8 +42,12 @@ import { TaskAddModalComponent } from './task-add-modal/task-add-modal.component
     MatCardModule,
     FormsModule,
     MatDialogModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
   ],
-  providers: [TaskService],
+  providers: [TaskService,
+              AuthService,
+            AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
