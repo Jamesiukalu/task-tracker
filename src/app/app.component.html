@@ -1,5 +1,29 @@
-<!-- app.component.html -->
-<div>
-  <h1>Welcome to your Angular App!</h1>
-  <router-outlet></router-outlet>
+<div class="h-screen flex flex-col">
+  <h1 class="text-center p-16 bg-gray-800 text-white">
+    Welcome to your Task Tracker!
+  </h1>
+  <div class="flex-grow overflow-auto">
+    <router-outlet></router-outlet>
+  </div>
+  <footer class="flex flex-col items-center text-center text-white bg-blue-900">
+    <div class="container p-6">
+      <div>
+        <p class="flex items-center justify-center">
+          <span class="mr-4">Register for free</span>
+          <button
+            type="button"
+            (click)="signOut()"
+            class="inline-block rounded-full border-2 border-neutral-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+            data-te-ripple-init
+            data-te-ripple-color="light">
+            Sign Out!
+          </button>
+        </p>
+      </div>
+    </div>
+    <div class="w-full pb-4 text-center">
+      © 2024 Copyright:
+      <a class="text-white" href="https://jameskalu.netlify.app/">Assessment by JamesKalu</a>
+    </div>
+  </footer>
 </div>

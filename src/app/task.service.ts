@@ -1,37 +1,17 @@
 import { Injectable } from '@angular/core';
+import { tasksDummyData } from './dummyData/tasks-dummy-data';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TaskService {
-  private tasks: { [key:string]: any[] } = {
-    open: [
-      { id: 1, title: 'Open Task 1', description: 'Description 1', dueDate: '2024-02-01' },
-      { id: 2, title: 'Open Task 2', description: 'Description 2', dueDate: '2024-02-03' },
-    ],
-    pending: [
-      { id: 3, title: 'Pending Task 1', description: 'Description 3', dueDate: '2024-02-05' },
-      { id: 4, title: 'Pending Task 2', description: 'Description 4', dueDate: '2024-02-07' },
-    ],
-    'in progress': [
-      { id: 5, title: 'Inprogress Task 1', description: 'Description 5', dueDate: '2024-02-09' },
-      { id: 6, title: 'Inprogress Task 2', description: 'Description 6', dueDate: '2024-02-17' },
-    ],
-    completed: [
-      { id: 7, title: 'Completed Task 1', description: 'Description 7', dueDate: '2024-02-15' },
-      { id: 8, title: 'Completed Task 2', description: 'Description 8', dueDate: '2024-02-18' },
-    ],
-  };
-  private draggedTask: { column: string, taskId: number } | null = null;
+  private tasks: { [key: string]: any[] } = tasksDummyData;
+  private draggedTask: { column: string; taskId: number } | null = null;
   private columns: string[] = ['open', 'pending', 'inprogress', 'completed'];
 
-
-
-
   getTasks(column: string): any[] {
-  return this.tasks[column.toLowerCase()] || []; // Use lowercase since your columns are in lowercase
+    return this.tasks[column.toLowerCase()] || []; // Use lowercase since your columns are in lowercase
   }
-
 
   addTask(column: string, task: any): void {
     task.id = this.generateUniqueId();
@@ -39,22 +19,31 @@ export class TaskService {
   }
 
   editTask(column: string, taskId: number, updatedTask: any): void {
-    const index = this.tasks[column].findIndex((task: any) => task.id === taskId);
+    const index = this.tasks[column].findIndex(
+      (task: any) => task.id === taskId
+    );
     if (index !== -1) {
-      this.tasks[column][index] = { ...this.tasks[column][index], ...updatedTask };
+      this.tasks[column][index] = {
+        ...this.tasks[column][index],
+        ...updatedTask,
+      };
     }
   }
 
   updateTaskLocally(taskId: number, updatedTask: any): void {
     const column = this.getColumnForTask(taskId);
-    const taskIndex = this.tasks[column].findIndex((task: any) => task.id === taskId);
+    const taskIndex = this.tasks[column].findIndex(
+      (task: any) => task.id === taskId
+    );
 
     if (taskIndex !== -1) {
       // Update the task in-memory
-      this.tasks[column][taskIndex] = { ...this.tasks[column][taskIndex], ...updatedTask };
+      this.tasks[column][taskIndex] = {
+        ...this.tasks[column][taskIndex],
+        ...updatedTask,
+      };
     }
   }
-
 
   getColumnForTask(taskId: number): string {
     if (!this.tasks) {
@@ -63,16 +52,19 @@ export class TaskService {
 
     const column = Object.keys(this.tasks).find((key) => {
       const tasksForKey = this.tasks[key];
-      return tasksForKey && tasksForKey.findIndex((task: any) => task.id === taskId) !== -1;
+      return (
+        tasksForKey &&
+        tasksForKey.findIndex((task: any) => task.id === taskId) !== -1
+      );
     });
 
     return column || '';
   }
 
-
-
   deleteTask(column: string, taskId: number): void {
-    this.tasks[column] = this.tasks[column].filter((task: any) => task.id !== taskId);
+    this.tasks[column] = this.tasks[column].filter(
+      (task: any) => task.id !== taskId
+    );
   }
 
   moveTask(sourceColumn: string, destinationColumn: string, taskId: number) {
@@ -103,19 +95,17 @@ export class TaskService {
     }
   }
 
-
-
-
-
-
   setDraggedTask(task: any): void {
-    this.draggedTask = { column: this.getOriginalColumn(task), taskId: task.id };
+    this.draggedTask = {
+      column: this.getOriginalColumn(task),
+      taskId: task.id,
+    };
   }
   getOriginalColumn(task: any): string {
     return this.getColumnForTask(task.id);
   }
 
-  getDraggedTask(): { column: string, taskId: number } | null {
+  getDraggedTask(): { column: string; taskId: number } | null {
     return this.draggedTask;
   }
 
@@ -127,7 +117,4 @@ export class TaskService {
     // Generate a unique ID (you might want to use a more robust solution in a real application)
     return Math.floor(Math.random() * 1000);
   }
-
-
-
 }

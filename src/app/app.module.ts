@@ -9,8 +9,8 @@ import { KanbanBoardComponent } from './kanban-board/kanban-board.component';
 import { TaskComponent } from './task/task.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DragDropModule } from '@angular/cdk/drag-drop'
-import { MatCardModule } from '@angular/material/card'
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatCardModule } from '@angular/material/card';
 import { TaskService } from './task.service';
 import { TaskEditModalComponent } from './task-edit-modal/task-edit-modal.component';
 import { TaskAddModalComponent } from './task-add-modal/task-add-modal.component';
@@ -31,7 +31,6 @@ import { AuthGuard } from './auth.guard';
     TaskEditModalComponent,
     TaskAddModalComponent,
     SignInComponent,
-
   ],
   entryComponents: [TaskEditModalComponent, TaskAddModalComponent],
   imports: [
@@ -45,9 +44,7 @@ import { AuthGuard } from './auth.guard';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
   ],
-  providers: [TaskService,
-              AuthService,
-            AuthGuard],
-  bootstrap: [AppComponent]
+  providers: [TaskService, AuthService, AuthGuard],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

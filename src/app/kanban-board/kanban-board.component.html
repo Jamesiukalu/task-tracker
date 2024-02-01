@@ -1,15 +1,35 @@
-<div class="bg-gray-800 text-white p-4" *ngIf="isAuthenticated">
-  <h1 class="text-2xl font-semibold">Task Tracker</h1>
-</div>
-
-<div class="kanban-board grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" cdkDropListGroup>
-  <div *ngFor="let column of columns" class="kanban-column bg-gray-200 p-4 rounded" cdkDropList (cdkDropListDropped)="onDrop($event, column)">
-    <h2 class="text-lg font-semibold mb-4">{{ column }}</h2>
-    <div *ngFor="let task of taskService.getTasks(column.toLowerCase())" class="task mb-2" cdkDrag (cdkDragStarted)="onDragStart(task)">
-      <app-task [task]="task" (editTaskClick)="onEditTask($event)" (deleteTaskClick)="deleteTask($event)"></app-task>
-    </div>
-    <div class="add-task-button" *ngIf="column === 'Open'">
-      <button class="bg-blue-500 text-white px-2 py-1 rounded" (click)="toggleAddTaskForm()">Add New Task</button>
+<div class="text-white p-4" *ngIf="isAuthenticated">
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+    cdkDropListGroup
+  >
+    <div
+      *ngFor="let column of columns"
+      class="bg-gray-200 p-4 rounded"
+      cdkDropList
+      (cdkDropListDropped)="onDrop($event, column)"
+    >
+      <h2 class="text-lg font-semibold mb-4 text-gray-700">{{ column }}</h2>
+      <div
+        *ngFor="let task of taskService.getTasks(column.toLowerCase())"
+        class="task mb-2"
+        cdkDrag
+        (cdkDragStarted)="onDragStart(task)"
+      >
+        <app-task
+          [task]="task"
+          (editTaskClick)="onEditTask($event)"
+          (deleteTaskClick)="deleteTask($event)"
+        ></app-task>
+      </div>
+      <div class="add-task-button" *ngIf="column === 'Open'">
+        <button
+          class="bg-blue-500 text-white px-2 py-1 rounded"
+          (click)="toggleAddTaskForm()"
+        >
+          Add New Task
+        </button>
+      </div>
     </div>
   </div>
 </div>

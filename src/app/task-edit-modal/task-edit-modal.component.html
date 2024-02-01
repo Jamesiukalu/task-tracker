@@ -2,17 +2,49 @@
   <h1 class="text-lg font-semibold mb-4">Edit Task</h1>
   <form class="flex flex-col space-y-4">
     <label for="title" class="text-sm font-semibold">Title:</label>
-    <input type="text" id="title" name="title" [(ngModel)]="editedTask.title" required class="border rounded p-2">
+    <input
+      type="text"
+      id="title"
+      name="title"
+      [(ngModel)]="editedTask.title"
+      required
+      class="border rounded p-2"
+    />
 
     <label for="description" class="text-sm font-semibold">Description:</label>
-    <textarea id="description" name="description" [(ngModel)]="editedTask.description" required class="border rounded p-2"></textarea>
+    <textarea
+      id="description"
+      name="description"
+      [(ngModel)]="editedTask.description"
+      required
+      class="border rounded p-2"
+    ></textarea>
 
     <label for="dueDate" class="text-sm font-semibold">Due Date:</label>
-    <input type="date" id="dueDate" name="dueDate" [(ngModel)]="editedTask.dueDate" required class="border rounded p-2">
+    <input
+      type="date"
+      id="dueDate"
+      name="dueDate"
+      [(ngModel)]="editedTask.dueDate"
+      required
+      class="border rounded p-2"
+    />
 
     <div class="flex space-x-2">
-      <button type="button" class="bg-green-500 text-white px-4 py-2 rounded" (click)="onSave()">Save</button>
-      <button type="button" class="bg-gray-500 text-white px-4 py-2 rounded" (click)="onCancel()">Cancel</button>
+      <button
+        type="button"
+        class="bg-green-500 text-white px-4 py-2 rounded"
+        (click)="onSave()"
+      >
+        Save
+      </button>
+      <button
+        type="button"
+        class="bg-gray-500 text-white px-4 py-2 rounded"
+        (click)="onCancel()"
+      >
+        Cancel
+      </button>
     </div>
   </form>
 </div>

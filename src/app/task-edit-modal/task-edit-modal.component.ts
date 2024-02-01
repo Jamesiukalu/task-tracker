@@ -1,5 +1,3 @@
-// task-edit-modal.component.ts
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { TaskService } from '../task.service';
@@ -11,7 +9,8 @@ import { TaskService } from '../task.service';
 })
 export class TaskEditModalComponent implements OnInit {
   editedTask: any;
-  constructor(private taskService: TaskService,
+  constructor(
+    private taskService: TaskService,
     public dialogRef: MatDialogRef<TaskEditModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -25,7 +24,7 @@ export class TaskEditModalComponent implements OnInit {
   onSave(): void {
     // Implement the logic to update the task
     // You may want to call a service method to update the task in your backend
-// Update the task locally
+    // Update the task locally
     // Close the dialog on save
     this.updateTaskLocally();
     this.dialogRef.close();
@@ -39,4 +38,4 @@ export class TaskEditModalComponent implements OnInit {
     // Close the dialog on cancel
     this.dialogRef.close();
   }
-  }
+}

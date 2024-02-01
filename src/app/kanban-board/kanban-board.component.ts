@@ -1,32 +1,35 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { CdkDragDrop, CdkDragStart } from '@angular/cdk/drag-drop';
 import { TaskService } from '../task.service';
-import { TaskDialogService } from '../task-dialog.service';import { MatDialog } from '@angular/material/dialog';
+import { TaskDialogService } from '../task-dialog.service';
+import { MatDialog } from '@angular/material/dialog';
 import { TaskAddModalComponent } from '../task-add-modal/task-add-modal.component';
 import { NewTaskDialogService } from '../new-task-dialog.service';
 import { AuthService } from '../auth.service';
 
-
 @Component({
   selector: 'app-kanban-board',
   templateUrl: './kanban-board.component.html',
-  styleUrls: ['./kanban-board.component.css']
+  styleUrls: ['./kanban-board.component.css'],
 })
 export class KanbanBoardComponent {
   columns = ['Open', 'Pending', 'In progress', 'Completed'];
-  newTask: { title: string, description: string, dueDate: string } = { title: '', description: '', dueDate: '' };
+  newTask: { title: string; description: string; dueDate: string } = {
+    title: '',
+    description: '',
+    dueDate: '',
+  };
   tasksOpenColumn = false;
   showAddTaskForm: boolean | undefined;
 
-
-  constructor(public taskService: TaskService,
+  constructor(
+    public taskService: TaskService,
     private taskDialogService: TaskDialogService,
     private newTaskDialogService: NewTaskDialogService,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
-    private authService: AuthService) {}
-
-
+    private authService: AuthService
+  ) {}
 
   get tasks(): any {
     const tasks = this.columns.reduce((acc, column) => {
@@ -39,26 +42,33 @@ export class KanbanBoardComponent {
   }
 
   get isAuthenticated(): boolean {
-    return !!this.authService.user$
+    return !!this.authService.user$;
   }
 
   onDragStart(task: any) {
     this.taskService.setDraggedTask(task);
   }
   onDrop(event: CdkDragDrop<string[]>, column: string) {
-
     if (event.previousContainer === event.container) {
       // Handle dropping within the same column (reordering)
       const draggedTask = this.taskService.getDraggedTask();
       if (draggedTask) {
-        this.taskService.moveTask(draggedTask.column, column, draggedTask.taskId);
+        this.taskService.moveTask(
+          draggedTask.column,
+          column,
+          draggedTask.taskId
+        );
         this.taskService.clearDraggedTask();
       }
     } else {
       // Handle dropping into a different column
       const draggedTask = this.taskService.getDraggedTask();
       if (draggedTask) {
-        this.taskService.moveTask(draggedTask.column, column, draggedTask.taskId);
+        this.taskService.moveTask(
+          draggedTask.column,
+          column,
+          draggedTask.taskId
+        );
         this.taskService.clearDraggedTask();
       }
     }
@@ -75,25 +85,22 @@ export class KanbanBoardComponent {
     }
   }
   toggleAddTaskForm() {
-    this.newTaskDialogService.openNewDialog((result: { title: string, description: string, dueDate: string }) => {
-      if (result) {
-        this.taskService.addTask('open', result);
+    this.newTaskDialogService.openNewDialog(
+      (result: { title: string; description: string; dueDate: string }) => {
+        if (result) {
+          this.taskService.addTask('open', result);
+        }
       }
-    })
-    }
+    );
+  }
 
+  deleteTask(taskId: number) {
+    // Determine the column in which the task is located
+    const column = this.taskService.getColumnForTask(taskId);
 
-
-deleteTask(taskId: number) {
-  // Determine the column in which the task is located
-  const column = this.taskService.getColumnForTask(taskId);
-
-  // Call the deleteTask method in the service
-  this.taskService.deleteTask(column, taskId);
-}
+    // Call the deleteTask method in the service
+    this.taskService.deleteTask(column, taskId);
+  }
 
   // Handle the addition of a new task to the "Open" column
-
-
-
 }
