@@ -12,10 +12,9 @@ export class AppComponent {
   constructor(private router: Router, private authService: AuthService) {}
 
   signOut(): void {
-    // Call your authentication service signOut method
+
     this.authService.signOut();
 
-    // Navigate to the sign-in page
-    this.router.navigate(['/signin']); // Replace '/signin' with the actual route for your sign-in page
+    this.router.navigate(['/signin']);
   }
 }
